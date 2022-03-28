@@ -1,10 +1,9 @@
 package tajbanana.consumeapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tajbanana.consumeapi.services.FeignServiceUtil;
+import tajbanana.consumeapi.services.FeignPostServiceUtil;
 
 import java.util.List;
 
@@ -12,15 +11,20 @@ import java.util.List;
 @RequestMapping("/api/feign")
 public class FeignAPIController {
 
+    @Autowired
     private FeignServiceUtil feignServiceUtil;
 
-    public FeignAPIController(FeignServiceUtil feignServiceUtil) {
-        this.feignServiceUtil = feignServiceUtil;
-    }
+    @Autowired
+    private FeignPostServiceUtil feignPostServiceUtil;
 
     @GetMapping(path = "all")
     public List<Object> getAllCountries() {
         return feignServiceUtil.getAllCountries();
+    }
+
+    @PostMapping("post")
+    public String postResponse(@RequestBody String text) {
+        return feignPostServiceUtil.postResponse(text);
     }
 
 }

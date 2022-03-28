@@ -11,5 +11,4 @@ public interface FeignServiceUtil {
     @GetMapping("all")
     List<Object> getAllCountries();
 
-
 }
